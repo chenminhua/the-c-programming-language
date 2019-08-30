@@ -47,3 +47,32 @@ its integration of pointers, arrays, and address arithmetic is one of the streng
 ```
 void *
 ```
+
+## Pointers vs Multi-dim arrays
+
+```c
+int a[10][20];
+int *b[10];
+// both a[3][4] and b[3][4] are syntactically legal references to a single int.
+```
+
+a is a true two-dimensional array: 200 int-sized locations have been set aside.
+
+For b, the definition only allocates 10 pointers and does not initialize them.
+
+The important advantage of the pointer array is that the rows of the array may be different lengths.
+
+## complicated declarations
+
+```c
+
+char **argv              // pointer to pointer to char
+int (*daytab)[13]        // pointer to array[13] of int
+int *daytab[13]          // array[13] of pointer to int
+void *comp()             // function return (pointer to void)
+void (*comp)()           // pointer to (function return void)
+int *f();                // function returning pointer to int
+int (*pf)();             // pointer to (function returning int)
+char (*(*x())[])()       // x是一个函数，这个函数返回一个指向数组的指针，数组里存着的元素都是指针，这些指针指向返回char的函数
+char (*(*x[3])())[5]     // x是个有三个元素的数组，每个元素都是指针，每个指针指向一个函数，每个函数返回一个pointer to array[5] of char
+```
